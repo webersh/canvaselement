@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Drawing Area</title>
+<!-- You can add your style here rather than in an external style sheet. -->
+<style>
+	canvas {
+	    border:5px solid #d3d3d3;
+	    background-color: #f1f1f1;
+	    display: block;
+	}
+</style>
+</head>
+<body>
+    <!-- DO NOT MODIFY THIS HTML -->
+    <canvas id = "myCanvas" width = "350" height = "500"  ></canvas>
+    <input type = "color" id = "picker"/>
+<script>
+var default_color = 'red';
+var click = true;
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+canvas.width = (window.innerWidth * 0.8);
+canvas.height = (window.innerHeight * 0.8);
+
+canvas.addEventListener('mousemove', function(e){
+    if (click == true){
+    var a = e.offsetX
+    var b = e.offsetY
+    x = a * canvas.width / canvas.clientWidth ;
+    y = b * canvas.height / canvas.clientHeight;
+    var ctx = canvas.getContext("2d");
+    ctx.beginPath();
+    ctx.arc(x,y,10, 0, Math.PI*2);
+    ctx.fillStyle = default_color;
+    ctx.fill();
+}
+}) 
+
+window.addEventListener('keydown', function(e) {
+if (e.key == 'b'){
+    color = "blue";
+}
+if (e.key == 'g'){
+    color = "green";
+}
+if (e.key == 'r'){
+    color = "red";
+}
+if (e.key == 'y'){
+    color = "yellow";
+}
+})
+
+document.addEventListener("change_color", function(e){
+    color = document.getElementById("picker").value
+})
+
+    
+document.addEventListener('keydown', function(g) {
+    if (g.keyCode == 32){
+        const context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    if (g.keyCode == 38){
+        pendown = false;
+    }
+    if (g.keyCode == 40){
+        pendown = true;
+    }
+})
+
+
+
+         
+</script>
+
+</body>
+</html>
